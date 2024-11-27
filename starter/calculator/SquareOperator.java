@@ -1,5 +1,8 @@
 package calculator;
 
+/**
+ * Operateur puissance carree
+ */
 public class SquareOperator extends Operator {
     @Override
     public void execute(State state) {

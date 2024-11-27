@@ -1,5 +1,8 @@
 package calculator;
 
+/**
+ * Operateur racine carree
+ */
 public class SqrtOperator extends Operator {
     @Override
     public void execute(State state) {

@@ -2,7 +2,14 @@ package calculator;
 
 import java.util.Scanner;
 
+/**
+ * Programme d'éxecution de la calculatrice en ligne de commande
+ */
 public class Calculator {
+    /**
+     * Programme principal
+     * @param args
+     */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         State state = new State();
@@ -15,16 +22,14 @@ public class Calculator {
             input = scanner.nextLine().trim(); // Lire l'entrée utilisateur
 
             if (input.equalsIgnoreCase("exit")) {
-                break; // Quitter si l'utilisateur tape 'exit'
+                break;
             }
 
             try {
                 if (isNumber(input)) {
-                    // Si c'est un nombre, définir comme valeur courante et empiler
                     state.setCurrentValue(Double.parseDouble(input));
                     state.pushCurrentValue();
                 } else {
-                    // Sinon, interpréter comme un opérateur
                     Operator operator = getOperator(input);
                     if (operator != null) {
                         operator.execute(state);
@@ -33,11 +38,9 @@ public class Calculator {
                     }
                 }
             } catch (Exception e) {
-                // Afficher les erreurs éventuelles
                 state.setError("Erreur : " + e.getMessage());
             }
 
-            // Afficher l'état actuel
             if (state.hasError()) {
                 System.out.println(state.getErrorMessage());
                 state.clearError();
@@ -50,7 +53,11 @@ public class Calculator {
         System.out.println("Calculatrice terminée.");
     }
 
-    // Vérifier si une chaîne représente un nombre
+    /**
+     * Fonction permettant de verifier si l'input de l'utilisateur est un nombre valide
+     * @param input nombre écrit par l'utilisateur
+     * @return true si il s'agit d'un nombre réel valide, false si ce n'est pas le cas
+     */
     private static boolean isNumber(String input) {
         try {
             Double.parseDouble(input);
@@ -60,7 +67,11 @@ public class Calculator {
         }
     }
 
-    // Associer les chaînes à des instances d'opérateurs
+    /**
+     * Fonction permettant d'effectuer la bonne opération selon input
+     * @param input opérateur demandé par l'utiliseur
+     * @return
+     */
     private static Operator getOperator(String input) {
         return switch (input) {
             case "+" -> new AddOperator();
@@ -74,22 +85,22 @@ public class Calculator {
         };
     }
 
+    /**
+     * Méthode affichant l'état actuel du calculateur
+     * @param state
+     */
     private static void displayState(State state) {
-        // Obtenir le contenu de la pile
         Object[] stackArray = state.getStack().toArray();
         StringBuilder stackDisplay = new StringBuilder();
 
-        // Construire la chaîne de la pile
         for (Object element : stackArray) {
             stackDisplay.append(element).append(" ");
         }
 
-        // Afficher la pile uniquement si elle n'est pas vide
         if (stackDisplay.length() > 0) {
             System.out.println(stackDisplay.toString().trim());
         }
 
-        // Afficher la valeur courante uniquement si elle est pertinente
         if (state.isIntermediateResult() || state.getCurrentValue() != 0.0 || state.hasDecimalPoint()) {
             System.out.println(state.getCurrentValue());
         }

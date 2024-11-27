@@ -1,5 +1,8 @@
 package calculator;
 
+/**
+ * Operator de soustraction
+ */
 public class SubtractOperator extends Operator {
     @Override
     public void execute(State state) {

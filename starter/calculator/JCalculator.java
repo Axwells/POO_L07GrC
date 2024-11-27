@@ -35,7 +35,6 @@ public class JCalculator extends JFrame {
     private void update() {
         // Modifier une zone de texte, JTextField.setText(string nom)
         jNumber.setText(state.hasError() ? state.getErrorMessage() : state.getCurrentValue().toString());
-
         // Modifier un composant liste, JList.setListData(Object[] tableau)
         jStack.setListData(state.getStack().toArray());
     }
@@ -138,32 +137,42 @@ public class JCalculator extends JFrame {
         setVisible(true);
     }
 
-  // Méthodes principales pour manipuler les opérations mémoire
-  private class MemoryStoreOperator extends Operator {
-    @Override
-    public void execute(State state) {
-      memoryValue = state.getCurrentValue();
-    }
-  }
+    // Méthodes principales pour manipuler les opérations mémoire
 
-  private class MemoryRecallOperator extends Operator {
-    @Override
-    public void execute(State state) {
-      if (memoryValue != null) {
-        state.setCurrentValue(memoryValue);
-      }
+    /**
+     * Operateur permettant de stocker la valeur courante dans la memoire de la calculatrice
+     */
+    private class MemoryStoreOperator extends Operator {
+        @Override
+        public void execute(State state) {
+            memoryValue = state.getCurrentValue();
+        }
     }
-  }
 
-  private class BackspaceOperator extends Operator {
-    @Override
-    public void execute(State state) {
-      String currentText = jNumber.getText();
-      if (currentText.length() > 1) {
-        state.setCurrentValue(Double.parseDouble(currentText.substring(0, currentText.length() - 1)));
-      } else {
-        state.setCurrentValue(0.0);
-      }
+    /**
+     * Operateur permettant de lire la valeur stockee dans la memoire de la calculatrice
+     */
+    private class MemoryRecallOperator extends Operator {
+        @Override
+        public void execute(State state) {
+            if (memoryValue != null) {
+                state.setCurrentValue(memoryValue);
+            }
+        }
     }
-  }
+
+    /**
+     * Operateur permettant de supprimer la plus petite unite de la valeur courante
+     */
+    private class BackspaceOperator extends Operator {
+        @Override
+        public void execute(State state) {
+            String currentText = jNumber.getText();
+            if (currentText.length() > 1) {
+                state.setCurrentValue(Double.parseDouble(currentText.substring(0, currentText.length() - 1)));
+            } else {
+                state.setCurrentValue(0.0);
+            }
+        }
+    }
 }

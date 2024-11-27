@@ -1,5 +1,8 @@
 package calculator;
 
+/**
+ * Operateur de multiplication
+ */
 public class MultiplyOperator extends Operator {
     @Override
     public void execute(State state) {

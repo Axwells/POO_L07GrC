@@ -1,5 +1,8 @@
 package calculator;
 
+/**
+ * Operateur de division
+ */
 public class DivideOperator extends Operator {
     @Override
     public void execute(State state) {

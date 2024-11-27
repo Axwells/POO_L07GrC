@@ -1,5 +1,8 @@
 package calculator;
 
+/**
+ * Operateur d'addition
+ */
 public class AddOperator extends Operator {
     @Override
     public void execute(State state) {
