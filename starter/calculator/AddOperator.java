@@ -15,6 +15,7 @@ public class AddOperator extends Operator {
         double b = state.pop();
         double a = state.pop();
         state.setCurrentValue(a + b);
-        state.setIntermediateResult(true); // Résultat intermédiaire
+
+        state.setIntermediateResult(true);
     }
 }

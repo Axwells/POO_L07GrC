@@ -72,7 +72,7 @@ public class Stack<T> implements Iterable<T> {
     }
 
     // Retourner un tableau des éléments
-    public Object[] toArray(String[] strings) {
+    public Object[] toArray() {
         Object[] array = new Object[size];
         Node<T> current = top;
         int index = 0;

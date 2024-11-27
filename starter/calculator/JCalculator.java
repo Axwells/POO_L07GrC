@@ -37,7 +37,7 @@ public class JCalculator extends JFrame {
         jNumber.setText(state.hasError() ? state.getErrorMessage() : state.getCurrentValue().toString());
 
         // Modifier un composant liste, JList.setListData(Object[] tableau)
-        jStack.setListData(state.getStack().toArray(new String[0]));
+        jStack.setListData(state.getStack().toArray());
     }
 
     // Ajout d'un bouton dans l'interface et de l'operation associee,

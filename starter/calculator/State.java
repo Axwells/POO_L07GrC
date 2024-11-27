@@ -32,7 +32,11 @@ public class State {
     }
 
     public void pushCurrentValue() {
-        stack.push(currentValue);
+        // Empiler uniquement si la valeur courante est pertinente
+        if (currentValue != 0.0 || hasDecimalPoint() || isIntermediateResult()) {
+            stack.push(currentValue);
+        }
+        // Réinitialiser la valeur courante après empilement
         currentValue = 0.0;
         hasDecimalPoint = false;
         decimalPlaces = 0;
