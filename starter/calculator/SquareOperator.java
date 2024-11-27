@@ -1,9 +1,14 @@
 package calculator;
 
-class SquareOperator extends Operator {
+public class SquareOperator extends Operator {
     @Override
     public void execute(State state) {
         double currentValue = state.getCurrentValue();
-        state.setCurrentValue(Math.pow(currentValue, 2)); // x²
+
+        // Calculer le carré
+        state.setCurrentValue(Math.pow(currentValue, 2));
+
+        // Marquer comme résultat intermédiaire
+        state.setIntermediateResult(true);
     }
 }

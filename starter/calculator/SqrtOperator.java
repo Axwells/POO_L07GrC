@@ -1,18 +1,20 @@
 package calculator;
 
-class SqrtOperator extends Operator {
+public class SqrtOperator extends Operator {
     @Override
     public void execute(State state) {
-        if (state.getStack().isEmpty()) {
-            state.setError("Pile vide pour la racine carrée.");
+        double currentValue = state.getCurrentValue();
+
+        // Si la valeur est négative, signaler une erreur
+        if (currentValue < 0) {
+            state.setError("Impossible de calculer la racine carrée d'un nombre négatif.");
             return;
         }
-        double a = state.pop();
-        if (a < 0) {
-            state.setError("Valeur négative pour la racine carrée.");
-            return;
-        }
-        state.setCurrentValue(Math.sqrt(a));
-        state.pushCurrentValue();
+
+        // Calculer la racine carrée
+        state.setCurrentValue(Math.sqrt(currentValue));
+
+        // Marquer comme résultat intermédiaire
+        state.setIntermediateResult(true);
     }
 }

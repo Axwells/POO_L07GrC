@@ -1,15 +1,20 @@
 package calculator;
 
-class InverseOperator extends Operator {
+public class InverseOperator extends Operator {
     @Override
     public void execute(State state) {
         double currentValue = state.getCurrentValue();
 
-        // Vérification si la valeur courante est 0 pour éviter la division par zéro
+        // Vérifier si la division par zéro est possible
         if (currentValue == 0) {
-            state.setError("Division par zéro impossible.");
-        } else {
-            state.setCurrentValue(1 / currentValue); // Inversion de la valeur
+            state.setError("Impossible de diviser par zéro.");
+            return;
         }
+
+        // Calculer l'inverse
+        state.setCurrentValue(1 / currentValue);
+
+        // Marquer comme résultat intermédiaire
+        state.setIntermediateResult(true);
     }
 }
