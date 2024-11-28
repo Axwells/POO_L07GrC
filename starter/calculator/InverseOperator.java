@@ -6,7 +6,10 @@ package calculator;
 public class InverseOperator extends Operator {
     @Override
     public void execute(State state) {
-        double currentValue = state.getCurrentValue();
+        if (state.getCurrentValue() != 0.0) {
+            state.pushCurrentValue();
+        }
+        double currentValue = state.getStack().pop();
 
         if (currentValue == 0) {
             state.setError("Impossible de diviser par zéro.");

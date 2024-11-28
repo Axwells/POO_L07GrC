@@ -33,6 +33,7 @@ public class Calculator {
                     Operator operator = getOperator(input);
                     if (operator != null) {
                         operator.execute(state);
+                        state.pushCurrentValue();
                     } else {
                         System.out.println("Opération inconnue : " + input);
                     }

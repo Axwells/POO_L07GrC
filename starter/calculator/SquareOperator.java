@@ -6,7 +6,10 @@ package calculator;
 public class SquareOperator extends Operator {
     @Override
     public void execute(State state) {
-        double currentValue = state.getCurrentValue();
+        if (state.getCurrentValue() != 0.0) {
+            state.pushCurrentValue();
+        }
+        double currentValue = state.getStack().pop();
 
         // Calculer le carré
         state.setCurrentValue(Math.pow(currentValue, 2));

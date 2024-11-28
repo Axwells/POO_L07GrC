@@ -6,7 +6,10 @@ package calculator;
 public class SqrtOperator extends Operator {
     @Override
     public void execute(State state) {
-        double currentValue = state.getCurrentValue();
+        if (state.getCurrentValue() != 0.0) {
+            state.pushCurrentValue();
+        }
+        double currentValue = state.getStack().pop();
 
         if (currentValue == 0.0 && state.getStack().isEmpty()) {
             state.setError("Pas de valeur pour calculer la racine carrée.");
